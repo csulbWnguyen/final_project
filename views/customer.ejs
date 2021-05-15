@@ -1,0 +1,80 @@
+<%- include("_header") -%>
+
+<h2> Find Products</h2>
+
+
+<h4>Total number of records in the database: <%= totRecs %></h4>
+
+<form action="/customer" method="POST">
+  <table>
+    <tr>
+        <td><label for="cust_id">ID</label>:</td>
+        <td><input type="number" name="cusID" id="cusID" /></td>
+        <td>(equal)</td>
+    </tr>
+    <tr>
+        <td><label for="custF_name">Customer's First Name</label>:</td>
+        <td><input type="text" name="cusFName" id="cusFName" /></td>
+        <td>(starts with)</td>
+    </tr>
+    <tr>
+        <td><label for="custLname">Customer's Last Name</label>:</td>
+        <td><input type="text" name="prod_desc" id="prod_desc" /></td>
+        <td>(starts with)</td>
+    </tr>
+    <tr>
+        <td><label for="cusState">State</label>:</td>
+        <td><input type="text" name="prod_price" id="prod_price" /></td>
+        <td>(Postal Code)</td>
+    </tr>
+    <tr>
+      <td><label for="cusSalesYTD">Sales YTD</label>:</td>
+      <td><input type="text" name="prod_price" id="prod_price" /></td>
+      <td>(greater than or equal)</td>
+  </tr>      <tr>
+    <td><label for="cusSalesPrev">Previous Years Sales</label>:</td>
+    <td><input type="text" name="prod_price" id="prod_price" /></td>
+    <td>(greater than or equal)</td>
+</tr>
+    <tr>
+        <td span="2">
+            <input type="submit" value="Find" />
+            <input type="reset" value="Reset" />
+        </td>
+    </tr>
+</table>
+</form>
+
+<% if (type === "post") { %>
+  <% if (result.result.length === 0) { %>
+      <h3>No records found!</h3>
+  <% } else { %>
+      <table>
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>State</th>
+                  <th>Sales Year to Date</th>
+                  <th>Last Year's Sales</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% result.result.forEach(product => { %> 
+                  <tr>
+                      <td><%= customer.cusID %></td>
+                      <td><%= customer.cusFname %></td>
+                      <td><%= customer.cusLname %></td>
+                      <td><%= customer.cusState %></td>
+                      <td><%= customer.SalesYTD %></td>
+                      <td><%= customer.cusSalesPrev %></td>
+                  </tr>
+              <% }); %>
+          </tbody>
+
+      </table>
+  <% } %>
+<% } %>
+
+<%- include("_footer") -%>   
